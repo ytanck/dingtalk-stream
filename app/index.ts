@@ -8,6 +8,7 @@ import {
 } from "../src/index.js";
 import axios from "axios";
 import config from "./config.json" assert { type: "json" };
+import { chat } from "./model.js";
 
 console.log("开始启动");
 const client = new DWClient({
@@ -17,21 +18,25 @@ const client = new DWClient({
 });
 client.registerCallbackListener(TOPIC_ROBOT, async (res) => {
   // 注册机器人回调事件
-  console.log("收到消息");
-  debugger;
-  // const {messageId} = res.headers;
-  const { text, senderStaffId, sessionWebhook } = JSON.parse(
+  // debugger;
+  const { text, senderStaffId, sessionWebhook, senderNick } = JSON.parse(
     res.data
   ) as RobotMessage;
+  console.log("收到消息==>", text?.content);
+  // console.log(888,res.data);
+  let answer = "";
+  if (text?.content) {
+    answer = await chat(text?.content, senderNick);
+  }
+
+  // 发送消息:自定义机器人发送群消息 https://open.dingtalk.com/document/orgapp/custom-robots-send-group-messages
   const body = {
     at: {
       atUserIds: [senderStaffId],
       isAtAll: false,
     },
     text: {
-      content:
-        "nodejs-getting-started say : 收到，" + text?.content ||
-        "钉钉,让进步发生",
+      content: answer || "钉钉,让进步发生",
     },
     msgtype: "text",
   };
@@ -46,10 +51,10 @@ client.registerCallbackListener(TOPIC_ROBOT, async (res) => {
       "x-acs-dingtalk-access-token": accessToken,
     },
   });
-
+  //console.log(result.data); //{ errcode: 0, errmsg: 'ok' }
   // stream模式下，服务端推送消息到client后，会监听client响应，如果消息长时间未响应会在一定时间内(60s)重试推消息，可以通过此方法返回消息响应，避免多次接收服务端消息。
   // 机器人topic，可以通过socketCallBackResponse方法返回消息响应
-  if(result?.data){
+  if (result?.data) {
     client.socketCallBackResponse(res.headers.messageId, result.data);
   }
 });

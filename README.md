@@ -48,3 +48,38 @@ npm start
 
 
 注意：ts-node-esm启动ts文件调试时，ts文件内import引用的文件后缀必须是js，ts会报找不到模块异常。
+
+机器人回调事件 返回示例 
+```json
+//https://dingtalk.apifox.cn/apidoc/project-467052/doc-3550059
+//console.log("收到消息",res.data);
+{
+    "senderPlatform": "Win",
+    "conversationId": "cidyCpZRWFRDlqvvyUXdEuT1w==",
+    "atUsers": [
+        {
+            "dingtalkId": "$:LWCP_v1:$8pUab8gVLKYm1ltfnK2KEhoPE1jB01u+"
+        }
+    ],
+    "chatbotCorpId": "dingb2ab6077195f4151f5bf40eda33b7ba0",
+    "chatbotUserId": "$:LWCP_v1:$8pUab8gVLKYm1ltfnK2KEhoPE1jB01u+",
+    "msgId": "msgPbXlQzb2+jgTEj2DYKrLEw==",
+    "senderNick": "杨涛",
+    "isAdmin": true,
+    "senderStaffId": "manager593",
+    "sessionWebhookExpiredTime": 1724042040127,
+    "createAt": 1724036639950,
+    "senderCorpId": "dingb2ab6077195f4151f5bf40eda33b7ba0",
+    "conversationType": "2",
+    "senderId": "$:LWCP_v1:$bVK8ELp4+2foinwrDH2btA==",
+    "conversationTitle": "啊啊啊-TEST",
+    "isInAtList": true,
+    "sessionWebhook": "https://oapi.dingtalk.com/robot/sendBySession?session=cdbfd4fabb8be77eb40da0809c6f7600",
+    "text": {
+        "content": "hi"
+    },
+    "robotCode": "ding7nfrewa9e23vuvev",
+    "msgtype": "text"//richText
+}
+
+```

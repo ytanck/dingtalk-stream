@@ -17,6 +17,7 @@ const defaultConfig = {
   autoReconnect: true,
   keepAlive: false,
   ua: '',
+  expires_in: 0,
   subscriptions: [
     {
       type: 'EVENT',
@@ -33,6 +34,7 @@ export interface DWClientConfig {
   ua?: string;
   endpoint?: string;
   access_token?: string;
+  expires_in?: number;//access_token的过期时间,7200s
   autoReconnect?: boolean;
   subscriptions: Array<{
     type: string;
@@ -150,11 +152,17 @@ export class DWClient extends EventEmitter {
   }
 
   async getAccessToken() {
+    const now = Date.now();
+    // 如果 token 还在有效期内，则直接返回
+    if (this.config.access_token && this.config.expires_in as number > now) {
+      return this.config.access_token;
+    }
     const result = await axios.get(
       `${GET_TOKEN_URL}?appkey=${this.config.clientId}&appsecret=${this.config.clientSecret}`
     );
     if (result.status === 200 && result.data.access_token) {
       this.config.access_token = result.data.access_token;
+      this.config.expires_in = now + result.data.expires_in * 1000;
       return result.data.access_token;
     } else {
       throw new Error('getAccessToken: get access_token failed');
