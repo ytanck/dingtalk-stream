@@ -24,10 +24,7 @@ client.registerCallbackListener(TOPIC_ROBOT, async (res) => {
   ) as RobotMessage;
   console.log("收到消息==>", text?.content);
   // console.log(888,res.data);
-  let answer = "";
-  if (text?.content) {
-    answer = await chat(text?.content, senderNick);
-  }
+  const answer = await chat(text?.content, senderNick);
 
   // 发送消息:自定义机器人发送群消息 https://open.dingtalk.com/document/orgapp/custom-robots-send-group-messages
   const body = {
@@ -52,7 +49,6 @@ client.registerCallbackListener(TOPIC_ROBOT, async (res) => {
     },
   });
   //console.log(result.data); //{ errcode: 0, errmsg: 'ok' }
-  // stream模式下，服务端推送消息到client后，会监听client响应，如果消息长时间未响应会在一定时间内(60s)重试推消息，可以通过此方法返回消息响应，避免多次接收服务端消息。
   // 机器人topic，可以通过socketCallBackResponse方法返回消息响应
   if (result?.data) {
     client.socketCallBackResponse(res.headers.messageId, result.data);

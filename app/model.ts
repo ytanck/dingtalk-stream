@@ -1,6 +1,7 @@
 import axios from "axios";
 const GPTKEY = "app-P4efSPFpYHO6Ho8oWV0JbNIN";
 
+// 文本对话消息chat-messages
 export const chat = async (content: string, user: string) => {
   try {
     const response = await axios({

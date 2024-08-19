@@ -49,8 +49,8 @@ npm start
 
 注意：ts-node-esm启动ts文件调试时，ts文件内import引用的文件后缀必须是js，ts会报找不到模块异常。
 
-机器人回调事件 返回示例 
-```json
+机器人接收消息的回调事件:返回示例 
+```js
 //https://dingtalk.apifox.cn/apidoc/project-467052/doc-3550059
 //console.log("收到消息",res.data);
 {
@@ -79,7 +79,7 @@ npm start
         "content": "hi"
     },
     "robotCode": "ding7nfrewa9e23vuvev",
-    "msgtype": "text"//richText
+    "msgtype": "text" // ['text','image','voice','file','link','markdown','action_card']
 }
 
 ```
