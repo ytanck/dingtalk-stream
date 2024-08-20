@@ -49,7 +49,8 @@ client.registerCallbackListener(TOPIC_ROBOT, async (res) => {
     },
   });
   //console.log(result.data); //{ errcode: 0, errmsg: 'ok' }
-  // 机器人topic，可以通过socketCallBackResponse方法返回消息响应
+
+  // 机器人topic，通过socketCallBackResponse方法返回消息响应
   if (result?.data) {
     client.socketCallBackResponse(res.headers.messageId, result.data);
   }

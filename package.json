@@ -48,7 +48,7 @@
     "Nodejs",
     "SDK"
   ],
-  "author": "junlong.hjl@alibaba-inc.com",
+  "author": "alibaba-inc.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/open-dingtalk/dingtalk-stream-sdk-nodejs/issues"
