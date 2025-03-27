@@ -7,7 +7,7 @@ export const chat = async (content: string, user: string) => {
     const response = await axios({
       method: "POST",
       // url: "http://172.31.21.89/v1/chat-messages",
-      url: "http://113.57.100.72/v1/chat-messages",
+      url: "https://dify.xxx.cn/v1/chat-messages",
       data: {
         inputs: {},
         query: content,

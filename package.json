@@ -34,6 +34,7 @@
   },
   "scripts": {
     "start": "ts-node-esm app/index.ts",
+    "start1": "esno app/index-stream-card.ts",
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -c --watch --watch.include 'src/**' -m inline",
     "prepublishOnly": "pnpm build",
@@ -62,6 +63,8 @@
   "dependencies": {
     "axios": "^1.4.0",
     "debug": "^4.3.4",
+    "dingtalk-stream": "^2.1.4",
+    "esno": "^4.8.0",
     "ws": "^8.13.0"
   },
   "devDependencies": {
